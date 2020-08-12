@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Toronto Hydro Demand Prediction</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/style.css">
+  <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment-with-locales.min.js"></script>
+
+   <!-- jquery.vectormap css -->
+   <link href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+   <!-- DataTables -->
+   <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+   <!-- Responsive datatable examples -->
+   <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />  
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="row">
+    <div class="row">
+      <div class="col-sm-3 header-left" style= "text-align: left;">Team: Homa N., Ahmad M., Navid M., Maryam T.
+      </div>
+      <div class="col-md-9 header-right">Toronto Hydro Demand Prediction
+      </div>
+    </div>
+<br>
+<br>
+</div>
+<!-- End of Header -->
+
+  <!-- Feature Image --> 
+  <div class="container container-img">
+    <div class="row ">
+      <div class="col-md-12 ">
+        <img src="https://github.com/maryamtorabikia/Toronto-Hydro-Demand-Prediction/blob/master/header.jpg?raw=true" class="img-fluid header-img" alt="Responsive image">
+        <div class="col-md-12 centered_text">
+          <h1>Toronto Hydro Demand Prediction</h1>
+          <!-- <p>Use the interactive charts below to explore the dataset</p> -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- End of Feature Image -->
+<br>
+
+  <!-- How it works -->
+  <br>
+  <br>
+  <div class="container">
+    <div class="row container-img"  >
+      <div class="col-md-12 exp-box">
+        <h2>How it works:</h2>
+        <br>
+        <h4>Based on gathered data from 2003 till now from IESO and OpenWheather APIs, we are able to predict Toronto Hydro Demand for 24 hours ahead.
+          The R2 Score value is around 98% based on Neural Network Models and Scikit Linear Regression.</h4>
+      </div>
+    </div>
+  </div>
+  <!-- End of How it works -->
+  <br/>
+  <br/>
+
+  <!-- Predicted Hydro Demand Chart-->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 the-chart">
+        <div id="line"></div>
+      </div>
+      <!-- <div class="col-md-4 col-md-offset-4">
+        <div id="bar_stacked"></div>
+      </div> -->
+    </div>
+  </div>
+  <!-- End of Predicted Hydro Demand Chart-->
+
+
+
+  <!-- <div class="container">
+    <div>
+      <h2>How it works:</h2>
+      <h3>Pick a specific date to plot the actual versus predicted demand measurements for city of Toronto hydro. </h3>
+    </div>
+  </div> -->
+
+  
+  <div class="container">
+    <div style="margin-top:10px" class="row">
+      <div class="col-md-12 exp-box" style= "text-align: left; padding-top: 10px;">
+        <select id="monthSelect" style="font-size:20px; max-width:100%;" onchange="monthChanged(this.value)" ></select>
+        <h4 style="text-align:left">Pick a specific month to plot the actual versus predicted demand measurements for city of Toronto hydro.</h4>
+      </div>
+      <!-- <div class="col-md-6">
+        <select id="monthSelect" style="font-size:20px; max-width:100%;" onchange="monthChanged(this.value)"></select>
+      </div> -->
+    </div>
+    <div style="margin-top:10px" class="row">
+      <div class="col-md-12 the-chart">
+        <div id="monthlyline"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Tables -->
+  <br>
+
+  <div class="container">
+    <div style="margin-top:10px" class="row">
+      <div class="col-md-12 the-table">
+         <table id="monthTitleTable"></table>
+         <br>
+         <table id="MonthPredictTable"></table>
+    </div>
+      </div>
+    <!-- <div style="margin-top:10px" class="row">
+      <div class="col-md-12 the-table">
+         <table id="MonthPredictTable"></table>
+    </div>
+      </div> -->
+ 
+
+    </div>
+  </div>
+  <!-- End of Summary Tables -->
+
+  <div class="container">
+    <div style="margin-top:10px" class="row">
+      <div class="col-md-12 exp-box" style= "text-align: left; padding-top: 10px;">
+        <select id="selDataset" style="font-size:20px; max-width:100%;" onchange="optionChanged(this.value)"></select>
+        <h4 style="text-align:left">Pick a specific date to plot the actual versus predicted demand measurements for city of Toronto hydro.</h4>
+      </div>
+      <!-- <div class="col-md-6">
+        <select id="selDataset" style="font-size:20px; max-width:100%;" onchange="optionChanged(this.value)"></select>
+      </div> -->
+      <div class="col-md-6">
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div style="margin-top:10px" class="row">
+      <div class="col-md-12 the-chart">
+        <div id="dailyline"></div>
+      </div>
+    </div>
+  </div>
+
+<!-- Summary Tables -->
+<br>
+
+<div class="container">
+  <div style="margin-top:10px" class="row">
+    <div class="col-md-12 the-table">
+       <table id="heading"></table>
+       <br>
+       <table id="predictTable"></table>
+  </div>
+    </div>
+  <!-- <div style="margin-top:10px" class="row">
+    <div class="col-md-12 the-table">
+       <table id="predictTable"></table>
+  </div>
+    </div> -->
+
+
+  </div>
+</div>
+<!-- End of Summary Tables -->
+
+
+<br>
+<br>
+<br>
+<br>
+
+<!-- Footer -->
+<br>
+<br>
+<div class="row">
+  <div class="row">
+    <div class="col-md-9 header-right"> </div>
+    <div class="col-sm-3 header-left">Team: Homa N., Ahmad M., Navid M., Maryam T.</div>
+  </div>
+</div>
+<!-- End of Footer -->
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script type="text/javascript" src="../static/js/config.js"></script>
+  <script src="../static/js/app.js"></script>
+
+
+</body>
+
+</html>
